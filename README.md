@@ -9,4 +9,5 @@ or
 >goSizer.exe "path"
 
 
-example: go run main.go "C:\Users\timbe\go pjcts\goSizer"
+example: 
+>go run main.go "C:\Users\timbe\go pjcts\goSizer"
