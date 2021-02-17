@@ -7,6 +7,10 @@ import (
 )
 
 func main() {
+	executeScan()
+}
+
+func executeScan() {
 	if len(os.Args) == 2 {
 		size := getDirSize(os.Args[1])
 		fmt.Printf("the size is:  %.3f mb", size)
@@ -25,13 +29,14 @@ func getDirSize(path string) float64 {
 		if !file.IsDir() {
 			size += file.Size()
 		}
-		if file.Size() == 0 {
-			println("path not found")
-		}
 		return err
 	}
 
 	filepath.Walk(path, readPath)
 	finalSize := float64(size) / 1024.0 / 1024.0
+
+	if finalSize == 0 {
+		println("path not found")
+	}
 	return finalSize
 }
