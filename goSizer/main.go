@@ -24,6 +24,8 @@ func executeScan() {
 
 func getDirSize(path string) float64 {
 	var size int64 = 0
+	var fileCount int = 0
+	var dirCount int = 0
 
 	readPath := func(_ string, file os.FileInfo, err error) error {
 		if err != nil {
@@ -31,6 +33,9 @@ func getDirSize(path string) float64 {
 		}
 		if !file.IsDir() {
 			size += file.Size()
+			fileCount++
+		} else {
+			dirCount++
 		}
 		return err
 	}
@@ -41,10 +46,16 @@ func getDirSize(path string) float64 {
 	if finalSize >= 1024 {
 		finalSize /= 1024
 		unit = "GB"
+	} else {
+		if finalSize < 1 {
+			finalSize *= 1024
+			unit = "KB"
+		}
 	}
 
 	if finalSize == 0 {
 		println("path not found")
 	}
+	println(dirCount, "folders - ", fileCount, "files")
 	return finalSize
 }
