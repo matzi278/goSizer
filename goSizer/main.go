@@ -15,6 +15,7 @@ func main() {
 func executeScan() {
 	if len(os.Args) == 2 {
 		size := getDirSize(os.Args[1])
+
 		fmt.Printf("the size is: %.2f", size)
 		print(" ", unit)
 	} else {
